@@ -2,6 +2,8 @@
 import Validator from './modules/validator';
 
 const validator = new Validator();
+
+/* проверка первой задачи - Никнеймы */
 console.log(`Roman - ${validator.validateUsername('Roman')}`);
 console.log(`Ro-Man_bb - ${validator.validateUsername('Ro-Man_bb')}`);
 console.log(`Roman-88_TT - ${validator.validateUsername('Roman-88_TT')}`);
@@ -11,3 +13,8 @@ console.log(`Roman2 - ${validator.validateUsername('Roman2')}`);
 console.log(`_Roman - ${validator.validateUsername('_Roman')}`);
 console.log(`Roman_ - ${validator.validateUsername('Roman_')}`);
 console.log(`Ro0000man - ${validator.validateUsername('Ro0000man')}`);
+
+/* проверка второй задачи - Телефоны */
+console.log(`8 (927) 000-00-00 => ${validator.validatePhoneNumber('8 (927) 000-00-00')}`);
+console.log(`+7 960 000 00 00 => ${validator.validatePhoneNumber('+7 960 000 00 00')}`);
+console.log(`+86 000 000 0000 => ${validator.validatePhoneNumber('+86 000 000 0000')}`);

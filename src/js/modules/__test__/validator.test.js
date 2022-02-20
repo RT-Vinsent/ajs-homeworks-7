@@ -1,5 +1,8 @@
 import Validator from '../validator';
 
+/*
+  Тесты для первой задачи Никнеймы
+*/
 test('Validator true', () => {
   const validator = new Validator();
 
@@ -36,4 +39,43 @@ test('Validator NULL values', () => {
   const resultOne = validator.validateUsername();
 
   expect(false).toBe(resultOne);
+});
+
+/*
+  Тесты для второй задачи Телефоны
+*/
+test('validatePhoneNumber Russion 8', () => {
+  const expected = '+79270000000';
+
+  const validator = new Validator();
+  const received = validator.validatePhoneNumber('8 (927) 000-00-00');
+
+  expect(received).toBe(expected);
+});
+
+test('validatePhoneNumber Russion 7', () => {
+  const expected = '+79600000000';
+
+  const validator = new Validator();
+  const received = validator.validatePhoneNumber('+7 960 000 00 00');
+
+  expect(received).toBe(expected);
+});
+
+test('validatePhoneNumber other numbers', () => {
+  const expected = '+860000000000';
+
+  const validator = new Validator();
+  const received = validator.validatePhoneNumber('+86 000 000 0000');
+
+  expect(received).toBe(expected);
+});
+
+test('validatePhoneNumber empty value', () => {
+  const expected = '';
+
+  const validator = new Validator();
+  const received = validator.validatePhoneNumber();
+
+  expect(received).toBe(expected);
 });

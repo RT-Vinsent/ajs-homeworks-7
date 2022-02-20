@@ -1,4 +1,7 @@
 export default class Validator {
+  /*
+    Первая задача Никнеймы
+  */
   validateUsername(name) {
     this.validName = false;
 
@@ -21,5 +24,31 @@ export default class Validator {
     this.validName = conditionOne && !conditionTwo;
 
     return this.validName;
+  }
+
+  /*
+    вторая задача Телефоны
+  */
+  validatePhoneNumber(tel) {
+    this.result = '';
+    if (!tel) {
+      return this.result;
+    }
+
+    /* забираем цифры из телефона */
+    const numberTel = tel.replace(/[^\d]/g, '');
+
+    /*
+      если номер из 11 цифр и первая цифра 8,
+      то меняем её на 7 и добавляем спереди +,
+      иначе просто добавляем спереди плюс.
+    */
+    if (numberTel.length === 11 && numberTel.indexOf(8) === 0) {
+      this.result = `+7${numberTel.slice(1, 11)}`;
+    } else {
+      this.result = `+${numberTel}`;
+    }
+
+    return this.result;
   }
 }
