@@ -2,11 +2,9 @@ export default class Validator {
   /*
     Первая задача Никнеймы
   */
-  validateUsername(name) {
-    this.validName = false;
-
+  static validateUsername(name) {
     if (!name) {
-      return this.validName;
+      return false;
     }
 
     /*
@@ -19,20 +17,17 @@ export default class Validator {
     /*
       валидация на количество символов от 4 и выше
     */
-    const conditionTwo = /\d{4,10}/.test(name);
+    const conditionTwo = /\d{4,}/.test(name);
 
-    this.validName = conditionOne && !conditionTwo;
-
-    return this.validName;
+    return (conditionOne && !conditionTwo);
   }
 
   /*
     вторая задача Телефоны
   */
-  validatePhoneNumber(tel) {
-    this.result = '';
+  static validatePhoneNumber(tel) {
     if (!tel) {
-      return this.result;
+      return '';
     }
 
     /* забираем цифры из телефона */
@@ -44,11 +39,8 @@ export default class Validator {
       иначе просто добавляем спереди плюс.
     */
     if (numberTel.length === 11 && numberTel.indexOf(8) === 0) {
-      this.result = `+7${numberTel.slice(1, 11)}`;
-    } else {
-      this.result = `+${numberTel}`;
+      return `+7${numberTel.slice(1, 11)}`;
     }
-
-    return this.result;
+    return (`+${numberTel}`);
   }
 }

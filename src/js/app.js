@@ -1,20 +1,30 @@
 /* eslint-disable no-console */
 import Validator from './modules/validator';
 
-const validator = new Validator();
-
 /* проверка первой задачи - Никнеймы */
-console.log(`Roman - ${validator.validateUsername('Roman')}`);
-console.log(`Ro-Man_bb - ${validator.validateUsername('Ro-Man_bb')}`);
-console.log(`Roman-88_TT - ${validator.validateUsername('Roman-88_TT')}`);
-console.log(`Ro-M_a888n - ${validator.validateUsername('Ro-M_a888n')}`);
-console.log(`1Roman - ${validator.validateUsername('1Roman')}`);
-console.log(`Roman2 - ${validator.validateUsername('Roman2')}`);
-console.log(`_Roman - ${validator.validateUsername('_Roman')}`);
-console.log(`Roman_ - ${validator.validateUsername('Roman_')}`);
-console.log(`Ro0000man - ${validator.validateUsername('Ro0000man')}`);
+const userNumber = [
+  'Roman',
+  'Ro-Man_bb',
+  'Roman-88_TT',
+  'Ro-M_a888n',
+  '1Roman',
+  'Roman2',
+  '_Roman',
+  'Roman_',
+  'Ro0000man',
+];
+
+for (let i = 0; i < userNumber.length; i += 1) {
+  console.log(`%s => ${Validator.validateUsername(userNumber[i])}`, userNumber[i]);
+}
 
 /* проверка второй задачи - Телефоны */
-console.log(`8 (927) 000-00-00 => ${validator.validatePhoneNumber('8 (927) 000-00-00')}`);
-console.log(`+7 960 000 00 00 => ${validator.validatePhoneNumber('+7 960 000 00 00')}`);
-console.log(`+86 000 000 0000 => ${validator.validatePhoneNumber('+86 000 000 0000')}`);
+const phoneNumber = [
+  '8 (927) 000-00-00',
+  '+7 960 000 00 00',
+  '+86 000 000 0000',
+];
+
+for (let i = 0; i < phoneNumber.length; i += 1) {
+  console.log(`%s => ${Validator.validatePhoneNumber(phoneNumber[i])}`, phoneNumber[i]);
+}

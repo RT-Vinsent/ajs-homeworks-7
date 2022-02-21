@@ -3,79 +3,46 @@ import Validator from '../validator';
 /*
   Тесты для первой задачи Никнеймы
 */
-test('Validator true', () => {
-  const validator = new Validator();
+test.each([
+  ['letters', 'Roman', true],
+  ['letters, "_" and "-"', 'Ro-Man_bb', true],
+  ['letters, "_", "-" and 2 number', 'Roman-88_TT', true],
+  ['letters, "_", "-" and 3 number', 'Ro-M_a888n', true],
+])(
+  ('Validator true "letters, "_", "-" and number"'),
+  (level, name, expected) => {
+    const result = Validator.validateUsername(name);
+    expect(result).toBe(expected);
+  },
+);
 
-  const resultOne = validator.validateUsername('Roman');
-  const resultTwo = validator.validateUsername('Ro-Man_bb');
-  const resultThree = validator.validateUsername('Roman-88_TT');
-  const resultFour = validator.validateUsername('Ro-M_a888n');
-
-  expect(true).toBe(resultOne);
-  expect(true).toBe(resultTwo);
-  expect(true).toBe(resultThree);
-  expect(true).toBe(resultFour);
-});
-
-test('Validator false', () => {
-  const validator = new Validator();
-
-  const resultOne = validator.validateUsername('1Roman');
-  const resultTwo = validator.validateUsername('Roman2');
-  const resultThree = validator.validateUsername('_Roman');
-  const resultFour = validator.validateUsername('Roman_');
-  const resultFive = validator.validateUsername('Ro0000man');
-
-  expect(false).toBe(resultOne);
-  expect(false).toBe(resultTwo);
-  expect(false).toBe(resultThree);
-  expect(false).toBe(resultFour);
-  expect(false).toBe(resultFive);
-});
-
-test('Validator NULL values', () => {
-  const validator = new Validator();
-
-  const resultOne = validator.validateUsername();
-
-  expect(false).toBe(resultOne);
-});
+test.each([
+  ['beginning number', '1Roman', false],
+  ['final number', 'Roman2', false],
+  ['beginning "_"', '_Roman', false],
+  ['final "_"', 'Roman_', false],
+  ['more 3 number', 'Ro0000man', false],
+  ['NULL values', '', false],
+])(
+  ('Validator false'),
+  (level, name, expected) => {
+    const result = Validator.validateUsername(name);
+    expect(result).toBe(expected);
+  },
+);
 
 /*
   Тесты для второй задачи Телефоны
 */
-test('validatePhoneNumber Russion 8', () => {
-  const expected = '+79270000000';
-
-  const validator = new Validator();
-  const received = validator.validatePhoneNumber('8 (927) 000-00-00');
-
-  expect(received).toBe(expected);
-});
-
-test('validatePhoneNumber Russion 7', () => {
-  const expected = '+79600000000';
-
-  const validator = new Validator();
-  const received = validator.validatePhoneNumber('+7 960 000 00 00');
-
-  expect(received).toBe(expected);
-});
-
-test('validatePhoneNumber other numbers', () => {
-  const expected = '+860000000000';
-
-  const validator = new Validator();
-  const received = validator.validatePhoneNumber('+86 000 000 0000');
-
-  expect(received).toBe(expected);
-});
-
-test('validatePhoneNumber empty value', () => {
-  const expected = '';
-
-  const validator = new Validator();
-  const received = validator.validatePhoneNumber();
-
-  expect(received).toBe(expected);
-});
+test.each([
+  ['Russion 8', '8 (927) 000-00-00', '+79270000000'],
+  ['Russion 7', '+7 960 000 00 00', '+79600000000'],
+  ['other numbers', '+86 000 000 0000', '+860000000000'],
+  ['empty value', '', ''],
+])(
+  ('validatePhoneNumber'),
+  (level, tel, expected) => {
+    const result = Validator.validatePhoneNumber(tel);
+    expect(result).toBe(expected);
+  },
+);
